@@ -121,4 +121,11 @@ Get all trucks.
 Get all trucks with no shipments.
 
 #### GET /trucks/shipments/optimize
-Clear out all current truck/shipments, and attempt to optimize the routes.
+Clear out all current truck/shipments, and attempt to optimize the routes. Still must work with valid locations for
+all vehicles to work.
+
+You can apply a custom maximum time window (in seconds) for the average truck by adding a query parameter:
+
+>...?max_time_window=14400
+
+This will set the time window for the average truck to 4 hours (60s * 60m * 4h = 14400s).
