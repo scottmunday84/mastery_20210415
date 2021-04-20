@@ -1,0 +1,32 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=ltl
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  app:
+    build: docker/app
+    volumes:
+      - ./venv:/opt/venv
+      - ./app:/app
+    working_dir: /app
+    environment:
+      - FLASK_APP=main.py
+      - DB_PROTOCOL=postgresql+psycopg2
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=postgres:5432
+      - DB_DB=ltl
+      - ORS_API_KEY=5b3ce3597851110001cf6248e2464453eec74ecc8c5eb2ffeb8b6dd8
+    ports:
+      - 5000:5000
+
+volumes:
+  data:
